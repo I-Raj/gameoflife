@@ -2,7 +2,6 @@ package gameoflifepackage;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -12,13 +11,10 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class Grid extends JPanel implements MouseListener, ActionListener {
-	Cell[][] grid = new Cell[100][100];
+	private Cell[][] grid = new Cell[100][100];
 
 	public Grid()	{
 		addMouseListener(this);
@@ -61,7 +57,7 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 	public void setupgrid()	{
 		for(int row = 0; row < 60; row++) {
 			for(int col = 0; col < 40; col++) {
-				cell[row][col]=new Cell(false);
+				grid[row][col] = new Cell(false);
 			}
 		}
 	}
@@ -72,7 +68,7 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 			for(int j = 0; j < 40; j++)	{
 				g.setColor(Color.BLACK);
 				g.drawRect((i * 10) + 80, (j * 10) + 60, 10, 10);
-				if(cell[i][j].isLiving() == false)	{
+				if(grid[i][j].isLiving() == false)	{
 					g.setColor(Color.gray);
 					g.fillRect((i * 10) + 80, (j * 10) + 60, 10, 10);
 				}
@@ -105,7 +101,7 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 	public void mousePressed(MouseEvent event) {
 		int col = ((event.getY() - 60) / 10);
 		int row = ((event.getX() - 80) / 10);
-		cell[row][col].cellclicked(row, col);
+		grid[row][col].swapIsLiving();
 		//System.out.print(row+" "+col);
 		this.repaint();
 	}

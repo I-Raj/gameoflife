@@ -12,11 +12,19 @@ public class Cell {
 		return isLiving;
 	}
 
-	public boolean getnextliving() {
-		return nextliving;
+	public void updateIsLiving() {
+		this.isLiving = willLive;
 	}
 
-	public void swapIsLivingState() {
-		isLiving = !isLiving;
+	public void swapIsLiving() {
+		this.isLiving = !isLiving;
+	}
+
+	public boolean getWillLive() {
+		return willLive;
+	}
+
+	public void setWillLive(boolean willLive) {
+		this.willLive = willLive;
 	}
 }
