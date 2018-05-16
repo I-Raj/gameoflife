@@ -8,14 +8,6 @@ public class Cell {
 		this.isLiving = isLiving;
 	}
 
-	public int getRow() {
-		return row;
-	}
-
-	public int getCol() {
-		return col;
-	}
-
 	public boolean isLiving() {
 		return isLiving;
 	}
