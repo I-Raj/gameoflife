@@ -52,18 +52,6 @@ public class Mananger {
             return true;
         }
     }
-        if num < 2:
-        return True
-        elif num == 2 or num == 3:
-        return False
-        elif num > 3:
-        return True
-        elif board[i][j] == 0 and num == 3:
-        return True
-
-        return False
-        return false;
-    }
 
     public int neighbor(int[][] matrix, int i, int j) {
         int[] x = {1, -1, 0};
