@@ -7,8 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class View extends JFrame implements ActionListener {
+public class View extends JFrame implements ActionListener, ChangeListener {
 	Grid grid;
 	GameManager gameManager;
 	JButton nextButton, startButton;
@@ -37,8 +39,9 @@ public class View extends JFrame implements ActionListener {
 		startButton.addActionListener(this);
 		add(startButton);
 		
-		this.speedSlider = new  JSlider(JSlider.HORIZONTAL,0,100,10);
+		this.speedSlider = new  JSlider(JSlider.HORIZONTAL, 0, 100, 0);
 		speedSlider.setBounds(350, 550, 110, 25);
+		speedSlider.addChangeListener(this);
 		add(speedSlider);
 		
 		this.sizeSlider = new  JSlider(JSlider.HORIZONTAL, 0, 100, 10);
@@ -61,6 +64,15 @@ public class View extends JFrame implements ActionListener {
 		} else if (event.getSource() == timer) {
 			gameManager.nextGeneration();
 			repaint();
+		}
+	}
+	
+	public void stateChanged(ChangeEvent event) {
+		if (event.getSource() == speedSlider) {
+			// Speed can range from 1000ms-4000ms
+			int speedValue = speedSlider.getValue();
+			int hertz = 1 + speedValue * 3 / 100;
+			timer.setDelay(1000 / hertz);
 		}
 	}
 }
