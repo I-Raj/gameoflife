@@ -82,22 +82,11 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 		
 	}
 	
-	public void mouseClicked(MouseEvent event) {
+	public void mouseClicked(MouseEvent event) {}
 
-	}
+	public void mouseEntered(MouseEvent event) {}
 
-
-	public void mouseEntered(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	public void mouseExited(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void mouseExited(MouseEvent event) {}
 
 	public void mousePressed(MouseEvent event) {
 		int row = event.getY() / 10;
@@ -108,10 +97,7 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 	}
 
 
-	public void mouseReleased(MouseEvent event) {
-		// TODO Auto-generated method stub
-
-	}
+	public void mouseReleased(MouseEvent event) {}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

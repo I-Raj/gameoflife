@@ -7,8 +7,8 @@ public class GameManager {
 		this.grid = grid;
 	}
 	
-	public int countAliveNeighbors(int row, int col) {
-		int aliveNeighbors = 0;
+	public int countLivingNeighbors(int row, int col) {
+		int livingNeighbors = 0;
 
 		int[] dxArray = {1, -1, 0};
 	  int[] dyArray = {1, -1, 0};
@@ -17,15 +17,47 @@ public class GameManager {
 	    for (int dy : dyArray) {
 	    	int neighborRow = row + dy;
 	    	int neighborCol = col + dx;
-	    	if ((row != 0 || col != 0) && neighborRow >= 0 && neighborRow <= grid.getHeight()) {
+	    	if ((row != 0 || col != 0) 
+	    			&& neighborRow >= 0 && neighborRow <= grid.getNumRows()
+	    			&& neighborCol >= 0 && neighborCol <= grid.getNumCols()) {
 	    		if (grid.getCell(neighborRow, neighborCol).isLiving()) {
-	    			aliveNeighbors++;
+	    			livingNeighbors++;
 	    		}
 	    	}
 	    }
 	  }
 	  
-    return aliveNeighbors;
+    return livingNeighbors;
+	}
+	
+	public void nextGeneration() {
+//		Iterates through all cells of the grid and updates their willLive
+//		Then will updates their isLiving (done)
+		for (int row = 0; row < grid.getNumRows(); row++) {
+			for (int col = 0; col < grid.getNumCols(); col++) {
+				int livingNeighbors = countLivingNeighbors(row, col);
+//				Update cell using grid.getCell(row, col).setWillLive(willLive);
+				if (grid.getCell(row, col).isLiving()) {
+//					Cell is alive
+					
+//					Update cell with these rules:
+//					Each cell with one or no neighbors dies, as if by solitude.
+//					Each cell with four or more neighbors dies, as if by overpopulation.
+//					Each cell with two or three neighbors survives.
+				} else {
+//					Cell is dead
+					
+//					Update cell with these rules:
+//					Each cell with three neighbors becomes populated.
+				}
+			}
+		}
+		
+		for (int row = 0; row < grid.getNumRows(); row++) {
+			for (int col = 0; col < grid.getNumCols(); col++) {
+				grid.getCell(row, col).updateIsLiving();
+			}
+		}
 	}
 //	class Mananger(Integer[][] matrix) {
 //    this.matrix = matrix;
@@ -75,23 +107,4 @@ public class GameManager {
 //      return true;
 //    }
 //  }
-//
-//  public int neighbor(int[][] matrix, int i, int j) {
-//    int[] x = {1, -1, 0};
-//    int[] y = {1, -1, 0};
-//    int rowLen = matrix.length;
-//    int colLen = matrix[0].length;
-//    int sum = 0;
-//    for (int x1 : x) {
-//      for (int y1 : y) {
-//        if (x1 == 0 && y1 == 0) {
-//          continue;
-//        }
-//        if (i + x1 >= 0 && i + x1 < rowLen && j + y1 >= 0 && j + y1 < colLen and abs
-//        (matrix[i + x1][j + y1]) == 1){
-//          sum++;
-//        }
-//      }
-//      return sum;
-//    }
 }
