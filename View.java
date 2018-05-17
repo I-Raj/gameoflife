@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
+import javax.swing.Timer;
 
 public class View extends JFrame implements ActionListener {
 	Grid grid;
 	GameManager gameManager;
 	JButton nextButton, startButton;
 	JSlider speedSlider, sizeSlider;
+	Timer timer = new Timer(1000, this);
 	
 	public View(Grid grid, GameManager gameManager) {
 		this.grid = grid;
@@ -49,7 +51,16 @@ public class View extends JFrame implements ActionListener {
 			gameManager.nextGeneration();
 			repaint();
 		} else if (event.getSource() == startButton) {
-			
+			if (startButton.getText() == "Start") {
+				timer.start();
+				startButton.setText("Stop");
+			} else if (startButton.getText() == "Stop") {
+				startButton.setText("Start");
+				timer.stop();
+			}
+		} else if (event.getSource() == timer) {
+			gameManager.nextGeneration();
+			repaint();
 		}
 	}
 }
