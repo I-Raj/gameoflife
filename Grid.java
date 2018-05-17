@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-public class Grid extends JPanel implements MouseListener, ActionListener {
+public class Grid extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
 	private Cell[][] grid = new Cell[100][100];
 	private int numCols, numRows;
 
@@ -21,6 +22,7 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 		setBounds(100, 100, numCols * 10 + 1, numRows * 10 + 1);
 		
 		addMouseListener(this);
+		addMouseMotionListener(this);
 //		JButton next = new JButton("Next");
 //		next.setBounds(130, 460, 60, 25);
 //		add(next);
@@ -87,6 +89,8 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 	public void mouseEntered(MouseEvent event) {}
 
 	public void mouseExited(MouseEvent event) {}
+	
+	public void mouseReleased(MouseEvent event) {}
 
 	public void mousePressed(MouseEvent event) {
 		int row = event.getY() / 10;
@@ -95,9 +99,13 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 //		System.out.print(row+" "+col);
 		repaint();
 	}
+	
+	public void mouseDragged(MouseEvent event) {
+		mousePressed(event);
+	}
+	
+	public void mouseMoved(MouseEvent event) {}
 
-
-	public void mouseReleased(MouseEvent event) {}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

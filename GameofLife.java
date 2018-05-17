@@ -3,7 +3,8 @@ package gameoflifepackage;
 public class GameofLife {
 	public static void main(String[] args) {
 		Grid grid = new Grid();
-		new View(grid);
+		GameManager gameManager = new GameManager(grid);
+		new View(grid, gameManager);
 	}
 }
 

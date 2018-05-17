@@ -9,11 +9,13 @@ import javax.swing.JSlider;
 
 public class View extends JFrame implements ActionListener {
 	Grid grid;
+	GameManager gameManager;
 	JButton nextButton, startButton;
 	JSlider speedSlider, sizeSlider;
 	
-	public View(Grid grid) {
+	public View(Grid grid, GameManager gameManager) {
 		this.grid = grid;
+		this.gameManager = gameManager;
 		
 		setSize(800, 800);
 		setLayout(null);
@@ -44,7 +46,8 @@ public class View extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == nextButton) {
-			
+			gameManager.nextGeneration();
+			repaint();
 		} else if (event.getSource() == startButton) {
 			
 		}

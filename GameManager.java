@@ -10,16 +10,16 @@ public class GameManager {
 	public int countLivingNeighbors(int row, int col) {
 		int livingNeighbors = 0;
 
-		int[] dxArray = {1, -1, 0};
-	  int[] dyArray = {1, -1, 0};
+		int[] dxArray = {-1, 0, 1};
+	  int[] dyArray = {-1, 0, 1};
 	  
 	  for (int dx : dxArray) {
 	    for (int dy : dyArray) {
 	    	int neighborRow = row + dy;
 	    	int neighborCol = col + dx;
-	    	if ((row != 0 || col != 0) 
-	    			&& neighborRow >= 0 && neighborRow <= grid.getNumRows()
-	    			&& neighborCol >= 0 && neighborCol <= grid.getNumCols()) {
+	    	if ((dx != 0 || dy != 0)
+	    			&& neighborRow >= 0 && neighborRow < grid.getNumRows()
+	    			&& neighborCol >= 0 && neighborCol < grid.getNumCols()) {
 	    		if (grid.getCell(neighborRow, neighborCol).isLiving()) {
 	    			livingNeighbors++;
 	    		}
@@ -31,24 +31,22 @@ public class GameManager {
 	}
 	
 	public void nextGeneration() {
-//		Iterates through all cells of the grid and updates their willLive
-//		Then will updates their isLiving (done)
 		for (int row = 0; row < grid.getNumRows(); row++) {
 			for (int col = 0; col < grid.getNumCols(); col++) {
 				int livingNeighbors = countLivingNeighbors(row, col);
-//				Update cell using grid.getCell(row, col).setWillLive(willLive);
-				if (grid.getCell(row, col).isLiving()) {
-//					Cell is alive
-					
-//					Update cell with these rules:
-//					Each cell with one or no neighbors dies, as if by solitude.
-//					Each cell with four or more neighbors dies, as if by overpopulation.
-//					Each cell with two or three neighbors survives.
+				Cell cell = grid.getCell(row, col);
+				if (cell.isLiving()) {
+					if (livingNeighbors <= 1 || livingNeighbors >= 4) {
+						cell.setWillLive(false);
+					} else {
+						cell.setWillLive(true);
+					}
 				} else {
-//					Cell is dead
-					
-//					Update cell with these rules:
-//					Each cell with three neighbors becomes populated.
+					if (livingNeighbors == 3) {
+						cell.setWillLive(true);
+					} else {
+						cell.setWillLive(false);
+					}
 				}
 			}
 		}
