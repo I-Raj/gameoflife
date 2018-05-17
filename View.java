@@ -3,10 +3,14 @@ package gameoflifepackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JSlider;
 
 public class View extends JFrame implements ActionListener {
 	Grid grid;
+	JButton nextButton, startButton;
+	JSlider speedSlider, sizeSlider;
 	
 	public View(Grid grid) {
 		this.grid = grid;
@@ -18,10 +22,32 @@ public class View extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		add(grid);
+		
+		this.nextButton = new JButton("Next");
+		nextButton.setBounds(150, 550, 80, 25);
+		nextButton.addActionListener(this);
+		add(nextButton);
+		
+		this.startButton = new JButton("Start");
+		startButton.setBounds(250, 550, 80, 25);
+		startButton.addActionListener(this);
+		add(startButton);
+		
+		this.speedSlider = new  JSlider(JSlider.HORIZONTAL,0,100,10);
+		speedSlider.setBounds(350, 550, 110, 25);
+		add(speedSlider);
+		
+		this.sizeSlider = new  JSlider(JSlider.HORIZONTAL, 0, 100, 10);
+		sizeSlider.setBounds(500, 550, 110, 25);
+		add(sizeSlider);
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		
+		if (event.getSource() == nextButton) {
+			
+		} else if (event.getSource() == startButton) {
+			
+		}
 	}
 }
 

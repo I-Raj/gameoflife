@@ -1,7 +1,5 @@
 package gameoflifepackage;
 
-import javax.swing.JFrame;
-
 public class GameofLife {
 	public static void main(String[] args) {
 		Grid grid = new Grid();

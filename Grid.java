@@ -11,9 +11,14 @@ import javax.swing.JPanel;
 
 public class Grid extends JPanel implements MouseListener, ActionListener {
 	private Cell[][] grid = new Cell[100][100];
+	private int numCols, numRows;
 
 	public Grid()	{
-		setBounds(100, 100, 601, 401);
+		// Can be changed later
+		this.numCols = 60;
+		this.numRows = 40;
+		
+		setBounds(100, 100, numCols * 10 + 1, numRows * 10 + 1);
 		
 		addMouseListener(this);
 //		JButton next = new JButton("Next");
@@ -54,32 +59,29 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 	}
 
 	public void setupGrid()	{
-		for(int row = 0; row < 60; row++) {
-			for(int col = 0; col < 40; col++) {
+		for(int row = 0; row < numRows; row++) {
+			for(int col = 0; col < numCols; col++) {
 				grid[row][col] = new Cell(false);
 			}
 		}
 	}
-
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		for(int row = 0; row < 60; row++)	{
-			for(int col = 0; col < 40; col++)	{
-				g.setColor(Color.BLACK);
-				g.drawRect(col * 10, row * 10, 10, 10);
-//				if ((row + col) % 2 == 1) {
-				if(grid[row][col].isLiving() == false)	{
-					g.setColor(Color.GRAY);
-				}
-				else {
-					g.setColor(Color.YELLOW);
-				}
-				g.fillRect(col * 10 + 1, row * 10 + 1, 9, 9);
-			}
-		}
+	
+	public int getNumCols() {
+		return numCols;
 	}
-
-
+	
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	public Cell getCell(int row, int col) {
+		return grid[row][col];
+	}
+	
+	public void actionPerformed(ActionEvent event) {
+		
+	}
+	
 	public void mouseClicked(MouseEvent event) {
 
 	}
@@ -98,7 +100,6 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 
 
 	public void mousePressed(MouseEvent event) {
-		System.out.println("hewoifjweofj");
 		int row = event.getY() / 10;
 		int col = event.getX() / 10;
 		grid[row][col].swapIsLiving();
@@ -112,7 +113,21 @@ public class Grid extends JPanel implements MouseListener, ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent event) {
-		
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for(int row = 0; row < numRows; row++)	{
+			for(int col = 0; col < numCols; col++)	{
+				g.setColor(Color.BLACK);
+				g.drawRect(col * 10, row * 10, 10, 10);
+//				if ((row + col) % 2 == 1) {
+				if(grid[row][col].isLiving() == false)	{
+					g.setColor(Color.GRAY);
+				}
+				else {
+					g.setColor(Color.YELLOW);
+				}
+				g.fillRect(col * 10 + 1, row * 10 + 1, 9, 9);
+			}
+		}
 	}
 }
