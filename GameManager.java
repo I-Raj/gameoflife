@@ -1,5 +1,4 @@
-package gameoflifepackage;
-
+package gameoflife;
 public class GameManager {
 	Grid grid;
 	
@@ -10,7 +9,7 @@ public class GameManager {
 	public int countLivingNeighbors(int row, int col) {
 		int livingNeighbors = 0;
 
-		int[] dxArray = {-1, 0, 1};
+	  int[] dxArray = {-1, 0, 1};
 	  int[] dyArray = {-1, 0, 1};
 	  
 	  for (int dx : dxArray) {
@@ -57,52 +56,4 @@ public class GameManager {
 			}
 		}
 	}
-//	class Mananger(Integer[][] matrix) {
-//    this.matrix = matrix;
-//  }
-//  // live (1) or dead (0)
-//  public boolean nextStep(Integer[][] matrix) {
-//    int rowLen = matrix.length;
-//    int colLen = matrix[0].length;
-//
-//    for(int i = 0; i < rowLen; i++) {
-//      for (int j = 0; j < colLen; j++) {
-//        boolean change = ifChange(matrix, i, j);
-//        if (change == false) {
-//          continue;
-//        } else {
-//          if (matrix[i][j] == 1) {
-//            matrix[i][j] = -1;
-//          } else if (matrix[i][j] == 0) {
-//            matrix[i][j] = -2;
-//          }
-//        }
-//      }
-//    }
-//
-//    for(int i = 0; i < rowLen; i++) {
-//      for (int j = 0; j < colLen; j++) {
-//        if (matrix[i][j] == -1) {
-//          matrix[i][j] = 0;
-//        } else if (matrix[i][j] == -2) {
-//          matrix[i][j] = 1;
-//        }
-//      }
-//    }
-//  }
-//
-//  public boolean ifChange(int[][] matrix, int i, int j) {
-//    int num = neighbor(matrix, i, j);
-//    if (matrix[i][j] == 1){
-//      if (num < 2){
-//        return true;
-//      }else if(num == 2 || num == 3){
-//        return false;
-//      }else if(num > 3){
-//        return true;
-//      }
-//    }else if(matrix[i][j] == 0 && num == 3){
-//      return true;
-//    }
-//  }
 }

@@ -28,3 +28,4 @@ public class Cell {
 		this.willLive = willLive;
 	}
 }
+

@@ -11,15 +11,20 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 public class Grid extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cell[][] grid = new Cell[100][100];
 	private int numCols, numRows;
+	private int cellSizeChange = 18;
 
 	public Grid()	{
 		// Can be changed later
-		this.numCols = 60;
-		this.numRows = 40;
+		this.numCols = 80;
+		this.numRows = 60;
 		
-		setBounds(100, 100, numCols * 10 + 1, numRows * 10 + 1);
+		setBounds(100, 80, numCols * 10 + 1, numRows * 10 + 1);
 		
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -93,8 +98,8 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	public void mouseReleased(MouseEvent event) {}
 
 	public void mousePressed(MouseEvent event) {
-		int row = event.getY() / 10;
-		int col = event.getX() / 10;
+		int row = event.getY() / 18;
+		int col = event.getX() / 18;
 		grid[row][col].swapIsLiving();
 //		System.out.print(row+" "+col);
 		repaint();
@@ -112,7 +117,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		for(int row = 0; row < numRows; row++)	{
 			for(int col = 0; col < numCols; col++)	{
 				g.setColor(Color.BLACK);
-				g.drawRect(col * 10, row * 10, 10, 10);
+				g.drawRect(col * cellSizeChange, row * cellSizeChange, cellSizeChange, cellSizeChange);
 //				if ((row + col) % 2 == 1) {
 				if(grid[row][col].isLiving() == false)	{
 					g.setColor(Color.GRAY);
@@ -120,8 +125,15 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				else {
 					g.setColor(Color.YELLOW);
 				}
-				g.fillRect(col * 10 + 1, row * 10 + 1, 9, 9);
+				g.fillRect(col * cellSizeChange + 1, row * cellSizeChange + 1, cellSizeChange-1, cellSizeChange-1);
 			}
 		}
 	}
+	public void setNewcellSize(int newSize) {
+		cellSizeChange = (newSize >= 5 ? newSize : 18);
+		repaint();
+	}
 }
+
+
+
