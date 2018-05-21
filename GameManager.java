@@ -1,4 +1,4 @@
-package gameoflife;
+package gameoflifepackage;
 public class GameManager {
 	Grid grid;
 	
@@ -50,6 +50,37 @@ public class GameManager {
 			}
 		}
 		
+		for (int row = 0; row < grid.getNumRows(); row++) {
+			for (int col = 0; col < grid.getNumCols(); col++) {
+				grid.getCell(row, col).updateIsLiving();
+			}
+		}
+	}
+
+
+
+
+	public void gliderView() {
+		for (int row = 0; row < grid.getNumRows(); row++) {
+			for (int col = 0; col < grid.getNumCols(); col++) {
+				int livingNeighbors = countLivingNeighbors(row, col);
+				Cell cell = grid.getCell(row, col);
+				if (cell.isLiving()) {
+					if (livingNeighbors <= 1 || livingNeighbors >= 4) {
+						cell.setWillLive(false);
+					} else {
+						cell.setWillLive(true);
+					}
+				} else {
+					if (livingNeighbors == 3) {
+						cell.setWillLive(true);
+					} else {
+						cell.setWillLive(false);
+					}
+				}
+			}
+		}
+
 		for (int row = 0; row < grid.getNumRows(); row++) {
 			for (int col = 0; col < grid.getNumCols(); col++) {
 				grid.getCell(row, col).updateIsLiving();
