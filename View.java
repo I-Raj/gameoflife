@@ -1,5 +1,6 @@
 package gameoflifepackage;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -15,17 +16,16 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
     private static final long serialVersionUID = 1L;
     Grid grid;
     GameManager gameManager;
-    JButton nextButton, startButton;
+    JButton nextButton, startButton, cellcolChoosBtn, gridcolChoosBtn;
     JSlider speedSlider, sizeSlider;
     JComboBox<String> comboBox;
-//    JLabel label;
-    static final String[] names = {"Clear", "Small Exploder", "Lightweight Spaceship", "Gosper Glider Gun", "COEN 275"};
-//    Icon[] icons = {
-//            new ImageIcon(getClass().getResource(names[0])),
-//            new ImageIcon(getClass().getResource(names[1])),
-//            new ImageIcon(getClass().getResource(names[2])),
-//            new ImageIcon(getClass().getResource(names[3])),
-//            new ImageIcon(getClass().getResource(names[4]))};
+    JLabel speedImg,sizeImg,paintImg,gameOfLife;
+    static final String[] names = {"Clear", "Small Exploder","Lightweight Spaceship", "Pulsar","Gosper Glider Gun", "COEN 275"};
+
+    ImageIcon speedIcon = new ImageIcon("/Users/umasurakod/Desktop/speed2.jpeg");
+    ImageIcon zoomIcon = new ImageIcon("/Users/umasurakod/Desktop/zoom.jpeg");
+    ImageIcon paintIcon = new ImageIcon("/Users/umasurakod/Desktop/paint2.jpeg");
+    ImageIcon headingIcon = new ImageIcon("/Users/umasurakod/Desktop/golHeading.png");
     Timer timer = new Timer(1000, this);
 
     public View(Grid grid, GameManager gameManager) {
@@ -46,17 +46,17 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
         add(nextButton);
 
         this.startButton = new JButton("Start");
-        startButton.setBounds(250, 700, 80, 25);
+        startButton.setBounds(230, 700, 80, 25);
         startButton.addActionListener(this);
         add(startButton);
 
         this.speedSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-        speedSlider.setBounds(350, 700, 110, 25);
+        speedSlider.setBounds(385, 700, 110, 25);
         speedSlider.addChangeListener(this);
         add(speedSlider);
 
         this.sizeSlider = new JSlider(JSlider.HORIZONTAL, 0, 50, 0);
-        sizeSlider.setBounds(500, 700, 110, 25);
+        sizeSlider.setBounds(535, 700, 110, 25);
         sizeSlider.addChangeListener(this);
         add(sizeSlider);
 
@@ -64,10 +64,35 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
         comboBox.setBounds(700, 700, 200, 25);
         comboBox.setMaximumRowCount(5);
         comboBox.addItemListener(this);
-
         add(comboBox);
+        
+        this.speedImg = new JLabel(speedIcon);
+        speedImg.setBounds(340,695,50,30);
+        add(speedImg);
+     
+        this.sizeImg = new JLabel(zoomIcon);
+        sizeImg.setBounds(492,700,50,30);
+        add(sizeImg);
+        
+        this.paintImg = new JLabel(paintIcon);
+        paintImg.setBounds(700,735,50,30);
+        add(paintImg);
+        
+        this.gameOfLife = new JLabel(headingIcon);
+        gameOfLife.setBounds(300,20,440,50);
+        add(gameOfLife);
+         
+        this.cellcolChoosBtn = new JButton("Cell"); 
+        cellcolChoosBtn.setBounds(750, 728, 80, 25);
+        cellcolChoosBtn.addActionListener(this);
+        add(cellcolChoosBtn);
+        
+        this.gridcolChoosBtn = new JButton("Grid"); 
+        gridcolChoosBtn.setBounds(750, 755, 80, 25);
+        gridcolChoosBtn.addActionListener(this);
+        add(gridcolChoosBtn);
 
-
+        this.getContentPane().setBackground(Color.white);
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -84,6 +109,18 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
             }
         } else if (event.getSource() == timer) {
             gameManager.nextGeneration();
+            repaint();
+        }
+        else if(event.getSource() == cellcolChoosBtn) {
+        	Color initialcolor=Color.YELLOW;    
+    		Color color1=JColorChooser.showDialog(this,"Select a color",initialcolor); 
+    		grid.setcellColor(color1);
+            repaint();
+        }
+        else if(event.getSource() == gridcolChoosBtn) {
+        	Color initialcolor=Color.GRAY;    
+    		Color color2=JColorChooser.showDialog(this,"Select a color",initialcolor); 
+    		grid.setgridColor(color2);
             repaint();
         }
     }
@@ -117,15 +154,16 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
                 grid.SpaceshipView();
                 repaint();
             } else if (item.equals(names[3])){
-                grid.gliderView();
+                grid.pulsarView();
                 repaint();
             } else if (item.equals(names[4])){
+                grid.gliderView();
+                repaint();
+            } else if (item.equals(names[5])){
                 grid.coenView();
                 repaint();
             }
-
         }
     }
 }
-
 

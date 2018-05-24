@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.JPanel;
 
 public class Grid extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
@@ -18,6 +17,8 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	private Cell[][] grid = new Cell[100][100];
 	private int numCols, numRows;
 	private int cellSizeChange = 18;
+	private Color cellColor=Color.YELLOW;
+	private Color gridColor=Color.GRAY;
 
 	public Grid() {
 		// Can be changed later
@@ -28,6 +29,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 
 		addMouseListener(this);
 		addMouseMotionListener(this);
+	
 //		JButton next = new JButton("Next");
 //		next.setBounds(130, 460, 60, 25);
 //		add(next);
@@ -84,9 +86,18 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 	public Cell getCell(int row, int col) {
 		return grid[row][col];
 	}
+/*	public Color getcellColor() {
+		return cellColor;
+	}*/
+	public void setcellColor(Color c) {
+		cellColor = c;
+	}
+	public void setgridColor(Color col) {
+		gridColor = col;
+	}
 
 	public void actionPerformed(ActionEvent event) {
-
+		
 	}
 
 	public void mouseClicked(MouseEvent event) {
@@ -125,9 +136,9 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				g.drawRect(col * cellSizeChange, row * cellSizeChange, cellSizeChange, cellSizeChange);
 //				if ((row + col) % 2 == 1) {
 				if (grid[row][col].isLiving() == false) {
-					g.setColor(Color.GRAY);
+					g.setColor(gridColor);
 				} else {
-					g.setColor(Color.YELLOW);
+					g.setColor(cellColor);
 				}
 				g.fillRect(col * cellSizeChange + 1, row * cellSizeChange + 1, cellSizeChange - 1, cellSizeChange - 1);
 			}
@@ -162,6 +173,29 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
+				cell.setWillLive(true);
+				cell.updateIsLiving();
+			}
+		}
+	}
+	
+	public void pulsarView() {
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				Cell cell = getCell(row, col);
+				cell.setWillLive(false);
+				cell.updateIsLiving();
+				if((row == 6 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
+				   (row == 8 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 9 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 10 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 11 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
+				   (row == 13 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
+				   (row == 14 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 15 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 16 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
+				   (row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))
+				   )
 				cell.setWillLive(true);
 				cell.updateIsLiving();
 			}
@@ -217,5 +251,6 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
     }
 
 }
+
 
 
