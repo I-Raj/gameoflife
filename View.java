@@ -19,13 +19,13 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
     JButton nextButton, startButton, cellcolChoosBtn, gridcolChoosBtn;
     JSlider speedSlider, sizeSlider;
     JComboBox<String> comboBox;
-    JLabel speedImg,sizeImg,paintImg,gameOfLife;
+    JLabel speedImg,sizeImg,paintImg,gameOfLife,backImg;
     static final String[] names = {"Clear", "Small Exploder","Lightweight Spaceship", "Pulsar","Gosper Glider Gun", "COEN 275"};
 
-    ImageIcon speedIcon = new ImageIcon("/Users/umasurakod/Desktop/speed2.jpeg");
+    ImageIcon speedIcon = new ImageIcon("/Users/umasurakod/Desktop/speed.jpeg");
     ImageIcon zoomIcon = new ImageIcon("/Users/umasurakod/Desktop/zoom.jpeg");
-    ImageIcon paintIcon = new ImageIcon("/Users/umasurakod/Desktop/paint2.jpeg");
-    ImageIcon headingIcon = new ImageIcon("/Users/umasurakod/Desktop/golHeading.png");
+    ImageIcon paintIcon = new ImageIcon("/Users/umasurakod/Desktop/paint.jpeg");
+    ImageIcon backIcon = new ImageIcon("/Users/umasurakod/Desktop/back.png");
     Timer timer = new Timer(1000, this);
 
     public View(Grid grid, GameManager gameManager) {
@@ -49,6 +49,16 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
         startButton.setBounds(230, 700, 80, 25);
         startButton.addActionListener(this);
         add(startButton);
+        
+        this.cellcolChoosBtn = new JButton("Cell"); 
+        cellcolChoosBtn.setBounds(750, 728, 80, 25);
+        cellcolChoosBtn.addActionListener(this);
+        add(cellcolChoosBtn);
+        
+        this.gridcolChoosBtn = new JButton("Grid"); 
+        gridcolChoosBtn.setBounds(750, 755, 80, 25);
+        gridcolChoosBtn.addActionListener(this);
+        add(gridcolChoosBtn);
 
         this.speedSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
         speedSlider.setBounds(385, 700, 110, 25);
@@ -78,21 +88,11 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
         paintImg.setBounds(700,735,50,30);
         add(paintImg);
         
-        this.gameOfLife = new JLabel(headingIcon);
-        gameOfLife.setBounds(300,20,440,50);
-        add(gameOfLife);
-         
-        this.cellcolChoosBtn = new JButton("Cell"); 
-        cellcolChoosBtn.setBounds(750, 728, 80, 25);
-        cellcolChoosBtn.addActionListener(this);
-        add(cellcolChoosBtn);
+        this.backImg = new JLabel(backIcon);
+        backImg.setBounds(0,0,1000,1000);
+        add(backImg);
         
-        this.gridcolChoosBtn = new JButton("Grid"); 
-        gridcolChoosBtn.setBounds(750, 755, 80, 25);
-        gridcolChoosBtn.addActionListener(this);
-        add(gridcolChoosBtn);
-
-        this.getContentPane().setBackground(Color.white);
+       // this.getContentPane().setBackground(Color.white);
     }
 
     public void actionPerformed(ActionEvent event) {
