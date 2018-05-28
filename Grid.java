@@ -173,6 +173,14 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				Cell cell = getCell(row, col);
+				cell.setWillLive(false);
+				cell.updateIsLiving();
+			     if((row==17&&(col==7||col==9)) || (row==18&&(col==8||col==9)) || (row==19)&&(col==8)||
+				(row==15&&(col==14||col==15)) || (row==16&&(col==14||col==16)) || (row==17)&&(col==14)||
+				(row==19&&(col==12)) || (row==20&&(col==12||col==13)) || ((row==21)&&(col==11 || col==13)) ||
+				(row==17&&(col==31||col==32||col==33))|| (row==18 && (col==31 || col==34)) || (row==19 && (col==31))||
+			        (row==20&&(col==31))||(row==21&&(col==32||col==34))
+			       )
 				cell.setWillLive(true);
 				cell.updateIsLiving();
 			}
@@ -185,7 +193,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				Cell cell = getCell(row, col);
 				cell.setWillLive(false);
 				cell.updateIsLiving();
-				if((row == 6 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
+			if((row == 6 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))||
 				   (row == 8 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 				   (row == 9 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 				   (row == 10 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
@@ -194,8 +202,7 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 				   (row == 14 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 				   (row == 15 &&(col == 14||col == 19 ||col == 21 ||col == 26)) ||
 				   (row == 16 &&(col== 14||col == 19 ||col == 21 ||col == 26)) ||
-				   (row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 ))
-				   )
+				   (row == 18 &&(col == 16||col == 17 ||col == 18 ||col == 22||col == 23 ||col == 24 )))
 				cell.setWillLive(true);
 				cell.updateIsLiving();
 			}
@@ -225,6 +232,31 @@ public class Grid extends JPanel implements MouseListener, MouseMotionListener, 
 
 			}
 
+		}
+	}
+	
+         public void blinkerView() {
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				Cell cell = getCell(row, col);
+				cell.setWillLive(false);
+				cell.updateIsLiving();
+				if((row==12&&(col==7||col==8||col==9)) ||
+				    (row==13&&(col==6||col==8||col==9||col==10)) ||
+				    (row==14&&(col==5||col==6||col==9||col==10||col==11)) ||
+				    (row==15 && (col==6 || col==7||col==12))||
+				    (row==16&&(col==6||col==7||col==9||col==10||col==11))||
+				    (row==17 && (col==7||col==8||col==9||col==10))||
+				    (row==18)&&(col==8)||
+				    (row==15 && (col==14||col==15||col==16))||
+				    (row==15 && (col==18||col==19||col==20))||
+				    (row==15 && (col==22||col==23||col==24))||
+				    (row==15 && (col==26||col==27||col==28)) ||
+				    (row==15 && (col==30||col==31||col==32))||
+				    (row==15 && (col==34||col==35||col==36)))
+					 cell.setWillLive(true);
+                                         cell.updateIsLiving();
+			}
 		}
 	}
 	public void coenView() {
