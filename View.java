@@ -20,7 +20,7 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
     JSlider speedSlider, sizeSlider;
     JComboBox<String> comboBox;
     JLabel speedImg,sizeImg,paintImg,gameOfLife,backImg;
-    static final String[] names = {"Clear", "Small Exploder","Lightweight Spaceship", "Pulsar","Gosper Glider Gun", "COEN 275"};
+    static final String[] names = {"Clear", "Small Exploder","Lightweight Spaceship", "Pulsar","Gosper Glider Gun","Blinker Fuse","COEN 275"};
 
     ImageIcon speedIcon = new ImageIcon("/Users/umasurakod/Desktop/speed.jpeg");
     ImageIcon zoomIcon = new ImageIcon("/Users/umasurakod/Desktop/zoom.jpeg");
@@ -160,10 +160,12 @@ public class View extends JFrame implements ActionListener, ChangeListener, Item
                 grid.gliderView();
                 repaint();
             } else if (item.equals(names[5])){
+                grid.blinkerView();
+                repaint();
+            }else if (item.equals(names[6])){
                 grid.coenView();
                 repaint();
             }
         }
     }
 }
-
